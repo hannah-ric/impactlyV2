@@ -2,6 +2,8 @@ import { Suspense, lazy } from "react";
 import { useRoutes, Routes, Route } from "react-router-dom";
 import routes from "tempo-routes";
 import AppLayout from "./components/layout/AppLayout";
+import { ErrorBoundary } from "./components/common/ErrorBoundary";
+import { LoadingSpinner } from "./components/common/LoadingSpinner";
 
 // Lazy load components for better performance
 const Home = lazy(() => import("./components/home"));
@@ -38,28 +40,30 @@ const Settings = () => (
 
 function App() {
   return (
-    <Suspense
-      fallback={
-        <div className="flex items-center justify-center h-screen">
-          Loading...
-        </div>
-      }
-    >
-      <>
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/materiality" element={<MaterialityAssessment />} />
-            <Route path="/implementation" element={<Implementation />} />
-            <Route path="/data-gaps" element={<DataGaps />} />
-            <Route path="/reports" element={<Reports />} />
-            <Route path="/stakeholders" element={<Stakeholders />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
-        </Routes>
-        {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
-      </>
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center h-screen">
+            <LoadingSpinner size="lg" text="Loading application..." />
+          </div>
+        }
+      >
+        <>
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/materiality" element={<MaterialityAssessment />} />
+              <Route path="/implementation" element={<Implementation />} />
+              <Route path="/data-gaps" element={<DataGaps />} />
+              <Route path="/reports" element={<Reports />} />
+              <Route path="/stakeholders" element={<Stakeholders />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
+          </Routes>
+          {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
+        </>
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 

@@ -45,6 +45,10 @@ import {
   MaterialityFilter,
 } from "@/types/materiality";
 import { cn } from "@/lib/utils";
+import { CATEGORY_COLORS, DEFAULT_MATRIX_CONFIG } from "@/lib/constants";
+import { ErrorBoundary } from "@/components/common/ErrorBoundary";
+import { LoadingSpinner } from "@/components/common/LoadingSpinner";
+import { EmptyState } from "@/components/common/EmptyState";
 
 interface D3MaterialityMatrixProps {
   items: MaterialityItem[];
@@ -62,60 +66,9 @@ interface D3MaterialityMatrixProps {
   autoResize?: boolean;
 }
 
-const defaultConfig: MaterialityMatrixConfig = {
-  width: 800,
-  height: 600,
-  margin: { top: 40, right: 40, bottom: 60, left: 60 },
-  quadrants: [
-    {
-      label: "Monitor",
-      description: "Low business and stakeholder impact",
-      color: "#f3f4f6",
-      minX: 0,
-      maxX: 2.5,
-      minY: 0,
-      maxY: 2.5,
-    },
-    {
-      label: "Manage",
-      description: "High business impact, low stakeholder impact",
-      color: "#fef3c7",
-      minX: 2.5,
-      maxX: 5,
-      minY: 0,
-      maxY: 2.5,
-    },
-    {
-      label: "Engage",
-      description: "Low business impact, high stakeholder impact",
-      color: "#dbeafe",
-      minX: 0,
-      maxX: 2.5,
-      minY: 2.5,
-      maxY: 5,
-    },
-    {
-      label: "Prioritize",
-      description: "High business and stakeholder impact",
-      color: "#dcfce7",
-      minX: 2.5,
-      maxX: 5,
-      minY: 2.5,
-      maxY: 5,
-    },
-  ],
-  thresholds: {
-    x: 2.5,
-    y: 2.5,
-  },
-};
-
-const categoryColors: Record<MaterialityCategory, string> = {
-  [MaterialityCategory.ENVIRONMENTAL]: "#10b981",
-  [MaterialityCategory.SOCIAL]: "#3b82f6",
-  [MaterialityCategory.GOVERNANCE]: "#8b5cf6",
-  [MaterialityCategory.ECONOMIC]: "#f59e0b",
-};
+// Use constants from the constants file
+const defaultConfig = DEFAULT_MATRIX_CONFIG;
+const categoryColors = CATEGORY_COLORS;
 
 export const D3MaterialityMatrix: React.FC<D3MaterialityMatrixProps> = ({
   items,
@@ -463,14 +416,42 @@ export const D3MaterialityMatrix: React.FC<D3MaterialityMatrixProps> = ({
           <CardTitle>Materiality Matrix</CardTitle>
         </CardHeader>
         <CardContent>
-          <Skeleton className="w-full h-[600px]" />
+          <LoadingSpinner
+            size="lg"
+            text="Loading matrix visualization..."
+            className="h-[600px]"
+          />
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (items.length === 0) {
+    return (
+      <Card className={cn("w-full", className)}>
+        <CardHeader>
+          <CardTitle>Materiality Matrix</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <EmptyState
+            title="No materiality items found"
+            description="Add some materiality items to visualize them in the matrix."
+            action={
+              onAddNew
+                ? {
+                    label: "Add Item",
+                    onClick: onAddNew,
+                  }
+                : undefined
+            }
+          />
         </CardContent>
       </Card>
     );
   }
 
   return (
-    <>
+    <ErrorBoundary>
       <Card className={cn("w-full", className)}>
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -773,6 +754,6 @@ export const D3MaterialityMatrix: React.FC<D3MaterialityMatrixProps> = ({
           )}
         </DialogContent>
       </Dialog>
-    </>
+    </ErrorBoundary>
   );
 };

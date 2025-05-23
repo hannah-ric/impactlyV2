@@ -7,6 +7,14 @@ import {
   MaterialityStatus,
   MaterialityPriority,
 } from "@/types/materiality";
+import { APIError, NetworkError, withRetry } from "./errors";
+import { API_CONFIG } from "./constants";
+import {
+  validateMaterialityItem,
+  validateTask,
+  validateStakeholder,
+  validateAssessmentResult,
+} from "./validation";
 
 // Types
 export interface Topic {
@@ -401,11 +409,25 @@ const actionPlans: ActionPlan[] = [
 // API functions with artificial delay to simulate network requests
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// Enhanced API response wrapper
+const apiCall = async <T>(fn: () => Promise<T>): Promise<T> => {
+  try {
+    return await withRetry(fn, API_CONFIG.RETRY_ATTEMPTS, API_CONFIG.DELAY_MS);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new APIError(error.message);
+    }
+    throw new NetworkError();
+  }
+};
+
 export const api = {
   // Topics API
   getTopics: async (): Promise<Topic[]> => {
-    await delay(800);
-    return [...topics];
+    return apiCall(async () => {
+      await delay(API_CONFIG.DELAY_MS);
+      return [...topics];
+    });
   },
 
   getTopic: async (id: string): Promise<Topic | undefined> => {
@@ -428,15 +450,20 @@ export const api = {
   },
 
   createTopic: async (topic: Omit<Topic, "id">): Promise<Topic> => {
-    await delay(1000);
-    const newTopic = {
-      ...topic,
-      id: `topic-${Date.now()}`,
-      lastUpdated: new Date().toISOString(),
-      createdBy: "user",
-    };
-    topics.push(newTopic);
-    return newTopic;
+    return apiCall(async () => {
+      // Validate input
+      validateMaterialityItem(topic);
+
+      await delay(1000);
+      const newTopic = {
+        ...topic,
+        id: `topic-${Date.now()}`,
+        lastUpdated: new Date().toISOString(),
+        createdBy: "user",
+      };
+      topics.push(newTopic);
+      return newTopic;
+    });
   },
 
   deleteTopic: async (id: string): Promise<void> => {
@@ -605,33 +632,38 @@ export const api = {
   createMaterialityItem: async (
     item: Omit<MaterialityItem, "id">,
   ): Promise<MaterialityItem> => {
-    await delay(800);
-    const newItem = {
-      ...item,
-      id: `item-${Date.now()}`,
-      lastUpdated: new Date(),
-    };
+    return apiCall(async () => {
+      // Validate input
+      validateMaterialityItem(item);
 
-    // Also create corresponding topic
-    const newTopic: Topic = {
-      id: newItem.id,
-      name: newItem.name,
-      description: newItem.description,
-      category: newItem.category,
-      stakeholderImpact: newItem.stakeholderImpact,
-      businessImpact: newItem.businessImpact,
-      status: newItem.status,
-      priority: newItem.priority,
-      lastUpdated: newItem.lastUpdated.toISOString(),
-      createdBy: newItem.createdBy,
-      tags: newItem.tags,
-      notes: newItem.notes,
-      evidence: newItem.evidence,
-      relatedItems: newItem.relatedItems,
-    };
-    topics.push(newTopic);
+      await delay(800);
+      const newItem = {
+        ...item,
+        id: `item-${Date.now()}`,
+        lastUpdated: new Date(),
+      };
 
-    return newItem;
+      // Also create corresponding topic
+      const newTopic: Topic = {
+        id: newItem.id,
+        name: newItem.name,
+        description: newItem.description,
+        category: newItem.category,
+        stakeholderImpact: newItem.stakeholderImpact,
+        businessImpact: newItem.businessImpact,
+        status: newItem.status,
+        priority: newItem.priority,
+        lastUpdated: newItem.lastUpdated.toISOString(),
+        createdBy: newItem.createdBy,
+        tags: newItem.tags,
+        notes: newItem.notes,
+        evidence: newItem.evidence,
+        relatedItems: newItem.relatedItems,
+      };
+      topics.push(newTopic);
+
+      return newItem;
+    });
   },
 
   updateMaterialityItem: async (
