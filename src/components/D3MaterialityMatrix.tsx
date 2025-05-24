@@ -35,6 +35,7 @@ import {
   ZoomIn,
   ZoomOut,
   RotateCcw,
+  Sparkles,
 } from "lucide-react";
 import * as d3 from "d3";
 import {
@@ -416,11 +417,31 @@ export const D3MaterialityMatrix: React.FC<D3MaterialityMatrixProps> = ({
           <CardTitle>Materiality Matrix</CardTitle>
         </CardHeader>
         <CardContent>
-          <LoadingSpinner
-            size="lg"
-            text="Loading matrix visualization..."
-            className="h-[600px]"
-          />
+          <div className="h-[600px] flex flex-col items-center justify-center">
+            <div className="relative w-24 h-24 mb-6">
+              <div className="absolute inset-0 bg-primary/20 rounded-full animate-pulse"></div>
+              <div className="absolute inset-2 bg-primary/30 rounded-full animate-pulse animation-delay-300"></div>
+              <div className="absolute inset-4 bg-primary/40 rounded-full animate-pulse animation-delay-600"></div>
+              <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+                <Sparkles className="h-8 w-8 text-primary animate-spin-slow" />
+              </div>
+            </div>
+            <div className="space-y-4 text-center">
+              <h3 className="text-xl font-semibold">AI Analysis in Progress</h3>
+              <p className="text-muted-foreground max-w-md">
+                Our ESG-BERT model is analyzing your data to identify material
+                topics and generate insights.
+              </p>
+              <div className="flex flex-col items-center space-y-2">
+                <div className="w-64 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="h-full bg-primary rounded-full animate-progress-indeterminate"></div>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  This may take a few moments...
+                </p>
+              </div>
+            </div>
+          </div>
         </CardContent>
       </Card>
     );

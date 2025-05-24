@@ -6,38 +6,43 @@
 
 @layer base {
   :root {
+    /* Enable smooth transitions when switching themes */
+    transition:
+      background-color var(--duration-normal) var(--ease-out),
+      color var(--duration-normal) var(--ease-out);
+
     /* Dynamic Color Palette */
-    --hue-primary: 251;
-    --hue-accent: 165;
+    --hue-primary: 230; /* More blue-focused primary */
+    --hue-accent: 190; /* Teal accent */
     --hue-success: 142;
     --hue-warning: 38;
     --hue-danger: 0;
 
     /* Vibrant Colors with HSL for dynamic theming */
-    --color-primary: hsl(var(--hue-primary), 91%, 60%);
-    --color-primary-light: hsl(var(--hue-primary), 91%, 95%);
-    --color-primary-dark: hsl(var(--hue-primary), 91%, 40%);
+    --color-primary: hsl(var(--hue-primary), 80%, 60%);
+    --color-primary-light: hsl(var(--hue-primary), 80%, 95%);
+    --color-primary-dark: hsl(var(--hue-primary), 80%, 40%);
 
-    --color-accent: hsl(var(--hue-accent), 82%, 55%);
-    --color-accent-light: hsl(var(--hue-accent), 82%, 95%);
+    --color-accent: hsl(var(--hue-accent), 75%, 55%);
+    --color-accent-light: hsl(var(--hue-accent), 75%, 95%);
 
     --color-success: hsl(var(--hue-success), 72%, 47%);
     --color-warning: hsl(var(--hue-warning), 92%, 50%);
     --color-danger: hsl(var(--hue-danger), 84%, 60%);
 
-    /* Neutrals with personality */
+    /* Clean Neutrals */
     --neutral-0: #ffffff;
-    --neutral-50: #fafbfc;
-    --neutral-100: #f4f6f8;
-    --neutral-200: #e9ecef;
-    --neutral-300: #dee2e6;
-    --neutral-400: #ced4da;
-    --neutral-500: #adb5bd;
-    --neutral-600: #6c757d;
-    --neutral-700: #495057;
-    --neutral-800: #343a40;
-    --neutral-900: #212529;
-    --neutral-950: #0d0f11;
+    --neutral-50: #fafafa;
+    --neutral-100: #f5f5f5;
+    --neutral-200: #e5e5e5;
+    --neutral-300: #d4d4d4;
+    --neutral-400: #a3a3a3;
+    --neutral-500: #737373;
+    --neutral-600: #525252;
+    --neutral-700: #404040;
+    --neutral-800: #262626;
+    --neutral-900: #171717;
+    --neutral-950: #0a0a0a;
 
     /* Semantic Colors */
     --bg-primary: var(--neutral-0);
@@ -52,15 +57,15 @@
     --border-primary: var(--neutral-200);
     --border-secondary: var(--neutral-100);
 
-    /* Advanced Shadows with color */
-    --shadow-xs: 0 1px 3px hsla(var(--hue-primary), 50%, 50%, 0.08);
-    --shadow-sm: 0 2px 8px hsla(var(--hue-primary), 50%, 50%, 0.08);
-    --shadow-md: 0 4px 12px hsla(var(--hue-primary), 50%, 50%, 0.1);
-    --shadow-lg: 0 8px 24px hsla(var(--hue-primary), 50%, 50%, 0.12);
-    --shadow-xl: 0 16px 48px hsla(var(--hue-primary), 50%, 50%, 0.16);
-    --shadow-2xl: 0 24px 64px hsla(var(--hue-primary), 50%, 50%, 0.2);
+    /* Refined Shadows */
+    --shadow-xs: 0 1px 3px hsla(var(--hue-primary), 20%, 50%, 0.05);
+    --shadow-sm: 0 2px 8px hsla(var(--hue-primary), 20%, 50%, 0.06);
+    --shadow-md: 0 4px 12px hsla(var(--hue-primary), 20%, 50%, 0.08);
+    --shadow-lg: 0 8px 24px hsla(var(--hue-primary), 20%, 50%, 0.1);
+    --shadow-xl: 0 16px 48px hsla(var(--hue-primary), 20%, 50%, 0.12);
+    --shadow-2xl: 0 24px 64px hsla(var(--hue-primary), 20%, 50%, 0.15);
 
-    --shadow-glow: 0 0 32px hsla(var(--hue-primary), 91%, 60%, 0.3);
+    --shadow-glow: 0 0 32px hsla(var(--hue-primary), 80%, 60%, 0.2);
 
     /* Fluid Typography Scale */
     --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
@@ -121,32 +126,32 @@
 
     /* ShadCN compatibility */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: var(--hue-primary) 91% 60%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: var(--hue-accent) 82% 55%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: var(--hue-primary) 80% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: var(--hue-accent) 75% 55%;
+    --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: var(--hue-primary) 91% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: var(--hue-primary) 80% 60%;
     --radius: 0.5rem;
   }
 
-  /* Dark Theme - Vibrant Dark */
+  /* Dark Theme - Clean Dark */
   .dark {
     --bg-primary: var(--neutral-950);
-    --bg-secondary: #0a0b0d;
-    --bg-elevated: #141618;
+    --bg-secondary: #121212;
+    --bg-elevated: #1a1a1a;
     --bg-overlay: hsla(0, 0%, 0%, 0.8);
 
     --text-primary: var(--neutral-50);
@@ -156,35 +161,35 @@
     --border-primary: hsla(0, 0%, 100%, 0.1);
     --border-secondary: hsla(0, 0%, 100%, 0.05);
 
-    /* Glowing shadows for dark mode */
+    /* Subtle shadows for dark mode */
     --shadow-xs: 0 1px 3px hsla(0, 0%, 0%, 0.3);
     --shadow-sm: 0 2px 8px hsla(0, 0%, 0%, 0.4),
-      0 0 1px hsla(var(--hue-primary), 91%, 60%, 0.1);
+      0 0 1px hsla(var(--hue-primary), 80%, 60%, 0.1);
     --shadow-md: 0 4px 12px hsla(0, 0%, 0%, 0.5),
-      0 0 2px hsla(var(--hue-primary), 91%, 60%, 0.1);
+      0 0 2px hsla(var(--hue-primary), 80%, 60%, 0.1);
     --shadow-lg: 0 8px 24px hsla(0, 0%, 0%, 0.6),
-      0 0 4px hsla(var(--hue-primary), 91%, 60%, 0.1);
+      0 0 4px hsla(var(--hue-primary), 80%, 60%, 0.1);
 
     /* ShadCN compatibility */
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: var(--hue-primary) 91% 60%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: var(--hue-accent) 82% 55%;
-    --accent-foreground: 210 40% 98%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: var(--hue-primary) 80% 60%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: var(--hue-accent) 75% 55%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: var(--hue-primary) 91% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: var(--hue-primary) 80% 60%;
   }
 }
 
@@ -205,33 +210,62 @@
 
   body {
     color: var(--text-primary);
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-primary); /* Changed to white background */
     overflow-x: hidden;
     position: relative;
+    transition:
+      background-color var(--duration-normal) var(--ease-out),
+      color var(--duration-normal) var(--ease-out);
   }
 
-  /* Animated Background */
+  /* Subtle Gradient Background */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     background-image: radial-gradient(
-        circle at 20% 80%,
-        hsla(var(--hue-primary), 91%, 60%, 0.05) 0%,
-        transparent 50%
+        circle at 15% 85%,
+        hsla(var(--hue-primary), 80%, 60%, 0.03) 0%,
+        transparent 40%
       ),
       radial-gradient(
-        circle at 80% 20%,
-        hsla(var(--hue-accent), 82%, 55%, 0.05) 0%,
-        transparent 50%
+        circle at 85% 15%,
+        hsla(var(--hue-accent), 75%, 55%, 0.03) 0%,
+        transparent 40%
       ),
       radial-gradient(
-        circle at 40% 40%,
-        hsla(var(--hue-success), 72%, 47%, 0.03) 0%,
-        transparent 50%
+        circle at 50% 50%,
+        hsla(var(--hue-success), 72%, 47%, 0.01) 0%,
+        transparent 60%
       );
     z-index: -1;
-    animation: backgroundShift 30s ease-in-out infinite;
+    opacity: 0.8;
+    transition: transform 0.8s var(--ease-out);
+  }
+
+  /* Darker gradient for dark mode */
+  .dark body::before {
+    background-image: radial-gradient(
+        circle at 15% 85%,
+        hsla(var(--hue-primary), 80%, 60%, 0.08) 0%,
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 85% 15%,
+        hsla(var(--hue-accent), 75%, 55%, 0.08) 0%,
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 50% 50%,
+        hsla(var(--hue-success), 72%, 47%, 0.04) 0%,
+        transparent 60%
+      );
+    opacity: 0.15;
+  }
+
+  /* Add hover effect to body for background shift */
+  body:hover::before {
+    transform: scale(1.03) rotate(1deg);
   }
 
   @keyframes backgroundShift {
@@ -240,10 +274,10 @@
       transform: scale(1) rotate(0deg);
     }
     33% {
-      transform: scale(1.1) rotate(120deg);
+      transform: scale(1.05) rotate(3deg); /* Subtle rotation */
     }
     66% {
-      transform: scale(0.9) rotate(240deg);
+      transform: scale(0.95) rotate(-3deg); /* Subtle rotation */
     }
   }
 
@@ -262,7 +296,7 @@
 
   /* Selection */
   ::selection {
-    background-color: hsla(var(--hue-primary), 91%, 60%, 0.3);
+    background-color: hsla(var(--hue-primary), 80%, 60%, 0.2);
     color: var(--text-primary);
   }
 
@@ -275,8 +309,8 @@
 
   /* Scrollbar - Custom Design */
   ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 8px; /* Thinner scrollbar */
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
@@ -286,7 +320,7 @@
   ::-webkit-scrollbar-thumb {
     background: var(--neutral-300);
     border-radius: var(--radius-full);
-    border: 3px solid var(--bg-primary);
+    border: 2px solid var(--bg-primary);
     transition: background var(--duration-fast) var(--ease-out);
   }
 
@@ -329,15 +363,17 @@
   }
 
   .glass {
-    background: hsla(0, 0%, 100%, 0.7);
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
-    border: 1px solid hsla(0, 0%, 100%, 0.2);
+    background: hsla(0, 0%, 100%, 0.8); /* More opaque for better readability */
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    border: 1px solid hsla(0, 0%, 100%, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); /* Subtle shadow */
   }
 
   .dark .glass {
-    background: hsla(0, 0%, 0%, 0.4);
-    border-color: hsla(0, 0%, 100%, 0.1);
+    background: hsla(0, 0%, 7%, 0.7);
+    border-color: hsla(0, 0%, 100%, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
   .gradient-text {
@@ -372,27 +408,107 @@
     );
     transform: rotate(45deg) translateX(-100%);
     transition: transform 0.6s;
+    /* Remove automatic animation, only on hover */
+    animation: none;
   }
 
   .shine:hover::after {
     transform: rotate(45deg) translateX(100%);
   }
 
-  .animate-on-load {
-    animation: fadeInUp 0.6s var(--ease-out) backwards;
+  /* Scroll-triggered animation base */
+  .animate-on-scroll {
+    opacity: 0;
+    transition:
+      opacity 0.8s var(--ease-in-out),
+      transform 0.8s var(--ease-in-out);
+    will-change: opacity, transform;
+    transition-delay: calc(var(--scroll-animation-delay, 0) * 1ms);
   }
 
-  .animate-on-load:nth-child(1) {
-    animation-delay: 0.1s;
+  /* Different animation effects */
+  .animate-on-scroll.effect-fade-up {
+    transform: translateY(30px);
+    filter: blur(2px);
   }
-  .animate-on-load:nth-child(2) {
-    animation-delay: 0.2s;
+
+  .animate-on-scroll.effect-fade-down {
+    transform: translateY(-30px);
+    filter: blur(2px);
   }
-  .animate-on-load:nth-child(3) {
-    animation-delay: 0.3s;
+
+  .animate-on-scroll.effect-fade-left {
+    transform: translateX(30px);
+    filter: blur(2px);
   }
-  .animate-on-load:nth-child(4) {
-    animation-delay: 0.4s;
+
+  .animate-on-scroll.effect-fade-right {
+    transform: translateX(-30px);
+    filter: blur(2px);
+  }
+
+  .animate-on-scroll.effect-zoom-in {
+    transform: scale(0.92);
+    filter: blur(2px);
+  }
+
+  .animate-on-scroll.effect-zoom-rotate {
+    transform: scale(0.92) rotate(-3deg);
+    filter: blur(2px);
+  }
+
+  /* Visible state for all effects */
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translate(0) scale(1) rotate(0);
+    filter: blur(0);
+  }
+
+  /* Staggered animations for children */
+  .animate-on-scroll:nth-child(1) {
+    --scroll-animation-delay: 100;
+  }
+  .animate-on-scroll:nth-child(2) {
+    --scroll-animation-delay: 200;
+  }
+  .animate-on-scroll:nth-child(3) {
+    --scroll-animation-delay: 300;
+  }
+  .animate-on-scroll:nth-child(4) {
+    --scroll-animation-delay: 400;
+  }
+  .animate-on-scroll:nth-child(5) {
+    --scroll-animation-delay: 500;
+  }
+  .animate-on-scroll:nth-child(6) {
+    --scroll-animation-delay: 600;
+  }
+
+  /* Staggered animations for grid items */
+  .grid > .animate-on-scroll:nth-child(3n + 1) {
+    --scroll-animation-delay: 100;
+  }
+  .grid > .animate-on-scroll:nth-child(3n + 2) {
+    --scroll-animation-delay: 250;
+  }
+  .grid > .animate-on-scroll:nth-child(3n + 3) {
+    --scroll-animation-delay: 400;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .animate-on-scroll {
+      transition-duration: 0.4s; /* Slightly faster on mobile */
+    }
+  }
+
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-on-scroll {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
   }
 
   @keyframes fadeInUp {
@@ -404,5 +520,33 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  @keyframes progress-indeterminate {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-progress-indeterminate {
+    animation: progress-indeterminate 1.5s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin 3s linear infinite;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
   }
 }

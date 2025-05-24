@@ -136,6 +136,9 @@ module.exports = {
         notification: "var(--z-notification)",
         tooltip: "var(--z-tooltip)",
       },
+      backgroundImage: {
+        "gradient-noise": "url('/noise-pattern.png')", // Add this line for the noise texture
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -147,8 +150,8 @@ module.exports = {
         },
         backgroundShift: {
           "0%, 100%": { transform: "scale(1) rotate(0deg)" },
-          "33%": { transform: "scale(1.1) rotate(120deg)" },
-          "66%": { transform: "scale(0.9) rotate(240deg)" },
+          "33%": { transform: "scale(1.05) rotate(3deg)" }, // Subtle rotation
+          "66%": { transform: "scale(0.95) rotate(-3deg)" }, // Subtle rotation
         },
         fadeInUp: {
           from: {
@@ -199,7 +202,7 @@ module.exports = {
         },
         float: {
           "0%, 100%": { transform: "translate(0, 0)" },
-          "50%": { transform: "translate(-20px, 20px)" },
+          "50%": { transform: "translate(-10px, 10px)" }, // Reduced movement
         },
         heroGlow: {
           from: { boxShadow: "var(--shadow-xl)" },
@@ -207,8 +210,8 @@ module.exports = {
         },
         orbFloat: {
           "0%, 100%": { transform: "translate(0, 0) scale(1)" },
-          "33%": { transform: "translate(30px, -30px) scale(1.1)" },
-          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+          "33%": { transform: "translate(15px, -15px) scale(1.05)" }, // Reduced movement
+          "66%": { transform: "translate(-10px, 10px) scale(0.95)" }, // Reduced movement
         },
         wave: {
           "0%, 100%": { transform: "rotate(0deg)" },
@@ -228,24 +231,24 @@ module.exports = {
         },
         aiPulse: {
           "0%, 100%": { transform: "scale(1) rotate(0deg)", opacity: "0.5" },
-          "50%": { transform: "scale(1.5) rotate(180deg)", opacity: "0.3" },
+          "50%": { transform: "scale(1.3) rotate(180deg)", opacity: "0.3" }, // Reduced scale
         },
         aiIconGlow: {
           "0%, 100%": {
-            boxShadow: "0 0 0 0 hsla(var(--hue-primary), 91%, 60%, 0.4)",
+            boxShadow: "0 0 0 0 hsla(var(--hue-primary), 80%, 60%, 0.4)",
           },
           "50%": {
-            boxShadow: "0 0 0 8px hsla(var(--hue-primary), 91%, 60%, 0)",
+            boxShadow: "0 0 0 8px hsla(var(--hue-primary), 80%, 60%, 0)",
           },
         },
         pulse: {
           "0%, 100%": { transform: "scale(1)", opacity: "1" },
-          "50%": { transform: "scale(1.15)", opacity: "0" },
+          "50%": { transform: "scale(1.1)", opacity: "0" }, // Reduced scale
         },
         emptyBounce: {
           "0%, 100%": { transform: "translateY(0)" },
-          "25%": { transform: "translateY(-10px) rotate(-5deg)" },
-          "75%": { transform: "translateY(-10px) rotate(5deg)" },
+          "25%": { transform: "translateY(-5px) rotate(-3deg)" }, // Reduced movement
+          "75%": { transform: "translateY(-5px) rotate(3deg)" }, // Reduced movement
         },
         skeletonWave: {
           to: { transform: "translateX(100%)" },
@@ -254,32 +257,39 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "background-shift": "backgroundShift 30s ease-in-out infinite",
+        "background-shift": "backgroundShift 3s ease-out", // Non-infinite version
         "fade-in-up": "fadeInUp 0.6s var(--ease-out) backwards",
         "slide-down": "slideDown 0.6s var(--ease-out)",
         "slide-in-left": "slideInLeft 0.6s var(--ease-out) 0.1s backwards",
-        spin: "spin 3s linear infinite",
-        "logo-pulse": "logoPulse 4s ease-in-out infinite",
-        "notification-pulse": "notificationPulse 2s ease-in-out infinite",
-        "avatar-float": "avatarFloat 6s ease-in-out infinite",
-        "badge-bounce": "badgeBounce 2s ease-in-out infinite",
-        float: "float 20s ease-in-out infinite",
-        "hero-glow": "heroGlow 4s ease-in-out infinite alternate",
-        "orb-float": "orbFloat 20s ease-in-out infinite",
-        wave: "wave 1s ease-in-out infinite",
-        "trend-bounce": "trendBounce 2s ease-in-out infinite",
-        shimmer: "shimmer 2s infinite",
-        "ai-pulse": "aiPulse 4s ease-in-out infinite",
-        "ai-icon-glow": "aiIconGlow 3s ease-in-out infinite",
-        pulse: "pulse 2s ease-in-out infinite",
-        "empty-bounce": "emptyBounce 3s ease-in-out infinite",
-        "skeleton-wave": "skeletonWave 1.5s infinite",
+        spin: "spin 3s linear", // Removed infinite
+        "logo-pulse": "logoPulse 2s ease-in-out", // Removed infinite
+        "notification-pulse": "notificationPulse 2s ease-in-out", // Removed infinite
+        "avatar-float": "avatarFloat 3s ease-in-out", // Removed infinite
+        "badge-bounce": "badgeBounce 2s ease-in-out", // Removed infinite
+        float: "float 3s ease-in-out", // Removed infinite
+        "hero-glow": "heroGlow 2s ease-in-out alternate", // Removed infinite
+        "orb-float": "orbFloat 3s ease-in-out", // Removed infinite
+        wave: "wave 1s ease-in-out", // Removed infinite
+        "trend-bounce": "trendBounce 2s ease-in-out", // Removed infinite
+        shimmer: "shimmer 2s", // Removed infinite
+        "ai-pulse": "aiPulse 2s ease-in-out", // Removed infinite
+        "ai-icon-glow": "aiIconGlow 2s ease-in-out", // Removed infinite
+        pulse: "pulse 2s ease-in-out", // Removed infinite
+        "empty-bounce": "emptyBounce 2s ease-in-out", // Removed infinite
+        "skeleton-wave": "skeletonWave 1.5s", // Removed infinite
+      },
+
+      /* Add hover variants for animations */
+      variants: {
+        extend: {
+          animation: ["hover", "group-hover"],
+        },
       },
       backdropBlur: {
-        md: "12px",
+        md: "10px", // Slightly reduced blur
       },
       backdropSaturate: {
-        150: "150%",
+        120: "120%", // Reduced saturation
       },
     },
   },

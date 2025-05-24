@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Bell, LogOut, Settings, User, Sun } from "lucide-react";
+import { Bell, LogOut, Settings, User, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 
 export function UserNav() {
@@ -24,7 +24,7 @@ export function UserNav() {
         className="relative w-11 h-11 grid place-items-center bg-transparent rounded-lg text-[var(--text-secondary)] transition-all duration-fast ease-out hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)] hover:translate-y-[-1px]"
       >
         <Bell className="h-5 w-5" />
-        <span className="absolute top-2 right-2 w-2 h-2 bg-danger rounded-full shadow-[0_0_0_3px_var(--bg-elevated)] animate-notification-pulse"></span>
+        <span className="absolute top-2 right-2 w-2 h-2 bg-danger rounded-full shadow-[0_0_0_3px_var(--bg-elevated)] group-hover:animate-notification-pulse"></span>
       </Button>
 
       {/* Theme Toggle */}
@@ -33,8 +33,18 @@ export function UserNav() {
         size="icon"
         className="w-11 h-11 grid place-items-center bg-transparent rounded-lg text-[var(--text-secondary)] transition-all duration-fast ease-out hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)] relative overflow-hidden"
         onClick={toggleTheme}
+        title={
+          theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+        }
+        aria-label={
+          theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+        }
       >
-        <Sun className="h-5 w-5 transition-transform duration-normal ease-elastic hover:rotate-180" />
+        {theme === "dark" ? (
+          <Sun className="h-5 w-5 transition-transform duration-normal ease-elastic hover:rotate-180" />
+        ) : (
+          <Moon className="h-5 w-5 transition-transform duration-normal ease-elastic hover:rotate-180" />
+        )}
       </Button>
 
       {/* User Menu */}
@@ -42,7 +52,7 @@ export function UserNav() {
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="w-11 h-11 rounded-full bg-gradient-to-br from-primary to-accent text-white grid place-items-center font-semibold text-sm relative transition-all duration-normal ease-out animate-avatar-float hover:scale-110 p-0 after:absolute after:inset-[-3px] after:bg-gradient-to-br after:from-primary after:to-accent after:rounded-full after:opacity-0 after:blur-md after:z-[-1] after:transition-opacity after:duration-normal after:ease-out hover:after:opacity-60"
+            className="w-11 h-11 rounded-full bg-gradient-to-br from-primary to-accent text-white grid place-items-center font-semibold text-sm relative transition-all duration-normal ease-out hover:animate-avatar-float hover:scale-110 p-0 after:absolute after:inset-[-3px] after:bg-gradient-to-br after:from-primary after:to-accent after:rounded-full after:opacity-0 after:blur-md after:z-[-1] after:transition-opacity after:duration-normal after:ease-out hover:after:opacity-60"
           >
             JD
           </Button>

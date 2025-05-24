@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useActionPlans } from "@/hooks/useActionPlans";
+import { ScrollAnimationWrapper } from "@/components/common/ScrollAnimationWrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -19,6 +20,9 @@ import {
   ListTodo,
   Plus,
   Settings,
+  ArrowRight,
+  CheckCircle,
+  Sparkles,
 } from "lucide-react";
 
 const Implementation = () => {
@@ -40,73 +44,80 @@ const Implementation = () => {
 
   return (
     <div className="p-6 bg-background">
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h1 className="text-3xl font-bold">Implementation Dashboard</h1>
-          <p className="text-muted-foreground mt-1">
-            Track and manage your ESG initiatives and tasks
-          </p>
+      <ScrollAnimationWrapper>
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h1 className="text-3xl font-bold">Implementation Dashboard</h1>
+            <p className="text-muted-foreground mt-1">
+              Track and manage your ESG initiatives and tasks
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm">
+              <Filter className="h-4 w-4 mr-2" />
+              Filter
+            </Button>
+            <Button variant="outline" size="sm">
+              <Settings className="h-4 w-4 mr-2" />
+              Settings
+            </Button>
+            <Button variant="default" size="sm">
+              <Plus className="h-4 w-4 mr-2" />
+              New Action Plan
+            </Button>
+          </div>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            <Filter className="h-4 w-4 mr-2" />
-            Filter
-          </Button>
-          <Button variant="outline" size="sm">
-            <Settings className="h-4 w-4 mr-2" />
-            Settings
-          </Button>
-          <Button variant="default" size="sm">
-            <Plus className="h-4 w-4 mr-2" />
-            New Action Plan
-          </Button>
+      </ScrollAnimationWrapper>
+
+      <ScrollAnimationWrapper effect="fade-up" delay={200}>
+        <div className="mb-6">
+          <Tabs value={activeView} onValueChange={setActiveView}>
+            <TabsList>
+              <TabsTrigger value="kanban" className="flex items-center gap-2">
+                <ListTodo className="h-4 w-4" />
+                Kanban Board
+              </TabsTrigger>
+              <TabsTrigger value="timeline" className="flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                Timeline
+              </TabsTrigger>
+              <TabsTrigger value="metrics" className="flex items-center gap-2">
+                <BarChart3 className="h-4 w-4" />
+                Metrics
+              </TabsTrigger>
+              <TabsTrigger
+                value="documents"
+                className="flex items-center gap-2"
+              >
+                <FileText className="h-4 w-4" />
+                Documents
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="kanban" className="mt-6">
+              <KanbanBoard plans={plans} />
+            </TabsContent>
+
+            <TabsContent value="timeline" className="mt-6">
+              <div className="text-center py-12 text-muted-foreground border rounded-lg">
+                Timeline view will be implemented in the next phase
+              </div>
+            </TabsContent>
+
+            <TabsContent value="metrics" className="mt-6">
+              <div className="text-center py-12 text-muted-foreground border rounded-lg">
+                Metrics dashboard will be implemented in the next phase
+              </div>
+            </TabsContent>
+
+            <TabsContent value="documents" className="mt-6">
+              <div className="text-center py-12 text-muted-foreground border rounded-lg">
+                Document repository will be implemented in the next phase
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
-      </div>
-
-      <div className="mb-6">
-        <Tabs value={activeView} onValueChange={setActiveView}>
-          <TabsList>
-            <TabsTrigger value="kanban" className="flex items-center gap-2">
-              <ListTodo className="h-4 w-4" />
-              Kanban Board
-            </TabsTrigger>
-            <TabsTrigger value="timeline" className="flex items-center gap-2">
-              <Calendar className="h-4 w-4" />
-              Timeline
-            </TabsTrigger>
-            <TabsTrigger value="metrics" className="flex items-center gap-2">
-              <BarChart3 className="h-4 w-4" />
-              Metrics
-            </TabsTrigger>
-            <TabsTrigger value="documents" className="flex items-center gap-2">
-              <FileText className="h-4 w-4" />
-              Documents
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="kanban" className="mt-6">
-            <KanbanBoard plans={plans} />
-          </TabsContent>
-
-          <TabsContent value="timeline" className="mt-6">
-            <div className="text-center py-12 text-muted-foreground border rounded-lg">
-              Timeline view will be implemented in the next phase
-            </div>
-          </TabsContent>
-
-          <TabsContent value="metrics" className="mt-6">
-            <div className="text-center py-12 text-muted-foreground border rounded-lg">
-              Metrics dashboard will be implemented in the next phase
-            </div>
-          </TabsContent>
-
-          <TabsContent value="documents" className="mt-6">
-            <div className="text-center py-12 text-muted-foreground border rounded-lg">
-              Document repository will be implemented in the next phase
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
+      </ScrollAnimationWrapper>
     </div>
   );
 };
